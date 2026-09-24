@@ -9,7 +9,7 @@ h1{font-size:30px;margin:0 0 8px}p{color:#94A3B8;margin:0 0 22px;line-height:1.7
 <body>
 <div style="font:900 44px monospace;color:#00F5FF">99</div>
 <h1 id="h">تقدر تهزمني؟ 🥊</h1>
-<p>مبارزة قدرات وتحصيلي في 60 ثانية.<br>مجانًا · بدون تسجيل · iPhone و iPad</p>
+<p>مبارزة قدرات وتحصيلي في 60 ثانية.<br>مجانًا · بدون تسجيل · iPhone و iPad و أندرويد</p>
 <a class="b" id="open" href="#">⚔ افتح المبارزة الآن</a>
 <a class="b" id="store" style="background:#0F172A;color:#F8FAFC;border:1px solid #1E293B" href="https://apps.apple.com/sa/app/id6809119944">ما عندك التطبيق؟ حمّله (مجاني)</a>
 <div class="s">تطبيق مستقل غير تابع لقياس</div>
@@ -18,8 +18,13 @@ h1{font-size:30px;margin:0 0 8px}p{color:#94A3B8;margin:0 0 22px;line-height:1.7
 var q=new URLSearchParams(location.search),c=q.get('c'),s=q.get('s')||'';
 if(c){document.getElementById('h').textContent=c+' يتحداك 🥊';}
 var deep='arena99://duel?'+(s?'s='+encodeURIComponent(s)+'&':'')+(c?'c='+encodeURIComponent(c):'');
-var store='https://apps.apple.com/sa/app/id6809119944';
-function go(){var t=Date.now();location.href=deep;setTimeout(function(){if(Date.now()-t<2000&&!document.hidden)location.href=store;},1400);}
+var android=/Android/i.test(navigator.userAgent);
+var play='https://play.google.com/store/apps/details?id=com.alhassanmu.arena99';
+var store=android?play:'https://apps.apple.com/sa/app/id6809119944';
+document.getElementById('store').href=store;
+// Android: intent:// opens the app if installed, otherwise Chrome follows the fallback to Google Play
+if(android){deep='intent://duel?'+(s?'s='+encodeURIComponent(s)+'&':'')+(c?'c='+encodeURIComponent(c):'')+'#Intent;scheme=arena99;package=com.alhassanmu.arena99;S.browser_fallback_url='+encodeURIComponent(play)+';end';}
+function go(){var t=Date.now();location.href=deep;if(android)return;setTimeout(function(){if(Date.now()-t<2000&&!document.hidden)location.href=store;},1400);}
 document.getElementById('open').addEventListener('click',function(e){e.preventDefault();go();});
 if(/iPhone|iPad/.test(navigator.userAgent))setTimeout(go,400);
 </script></body></html>
