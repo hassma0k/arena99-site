@@ -1,30 +1,54 @@
 <!doctype html>
 <html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ساحة 99 — العب أول مبارزة الآن</title>
-<meta property="og:title" content="تقدر تهزمني؟ 🥊 ساحة 99"><meta property="og:description" content="مبارزة قدرات وتحصيلي في 60 ثانية — مجانًا وبدون تسجيل.">
-<style>body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:#07090E;color:#F8FAFC;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
-h1{font-size:30px;margin:0 0 8px}p{color:#94A3B8;margin:0 0 22px;line-height:1.7}
-.b{display:block;width:100%;max-width:340px;background:linear-gradient(135deg,#00F5FF,#38BDF8);color:#03222a;font-weight:900;font-size:18px;text-decoration:none;border-radius:14px;padding:16px;margin:8px 0}
+<title>ساحة 99 — تقدر تتجاوزني؟</title>
+<meta property="og:title" content="تقدر تتجاوزني؟ ⚡ ساحة 99"><meta property="og:description" content="نفس الأسئلة الخمسة في 60 ثانية — تلعبها من المتصفح مباشرة، مجانًا وبدون تحميل.">
+<style>body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:#07090E;color:#F8FAFC;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;box-sizing:border-box}
+h1{font-size:28px;margin:0 0 8px}p{color:#94A3B8;margin:0 0 18px;line-height:1.7}
+.b{display:block;width:100%;max-width:340px;background:linear-gradient(135deg,#00F5FF,#38BDF8);color:#03222a;font-weight:900;font-size:18px;text-decoration:none;border-radius:14px;padding:16px;margin:8px 0;box-sizing:border-box}
+.g{background:#0F172A;color:#F8FAFC;border:1px solid #1E293B;font-size:15px}
+.grid{font-size:28px;letter-spacing:6px;direction:ltr;margin:0 0 6px}
 .s{color:#64748B;font-size:12px;margin-top:26px}</style></head>
 <body>
 <div style="font:900 44px monospace;color:#00F5FF">99</div>
 <h1 id="h">تقدر تهزمني؟ 🥊</h1>
-<p>مبارزة قدرات وتحصيلي في 60 ثانية.<br>مجانًا · بدون تسجيل · iPhone و iPad و أندرويد</p>
+<div class="grid" id="grid" hidden></div>
+<p id="p">مبارزة قدرات وتحصيلي في 60 ثانية.<br>مجانًا · بدون تسجيل</p>
 <a class="b" id="open" href="#">⚔ افتح المبارزة الآن</a>
-<a class="b" id="store" style="background:#0F172A;color:#F8FAFC;border:1px solid #1E293B" href="https://apps.apple.com/sa/app/id6809119944">ما عندك التطبيق؟ حمّله (مجاني)</a>
+<a class="b g" id="store" href="https://apps.apple.com/sa/app/id6809119944">ما عندك التطبيق؟ حمّله (مجاني)</a>
 <div class="s">تطبيق مستقل غير تابع لقياس</div>
 <script>
-// try the app first; if it isn't installed the store opens after a moment.
-var q=new URLSearchParams(location.search),c=q.get('c'),s=q.get('s')||'';
-if(c){document.getElementById('h').textContent=c+' يتحداك 🥊';}
-var deep='arena99://duel?'+(s?'s='+encodeURIComponent(s)+'&':'')+(c?'c='+encodeURIComponent(c):'');
-var android=/Android/i.test(navigator.userAgent);
+var q=new URLSearchParams(location.search),c=q.get('c'),s=q.get('s')||'',r=q.get('r');
+var android=/Android/i.test(navigator.userAgent),ios=/iPhone|iPad|iPod/.test(navigator.userAgent);
 var play='https://play.google.com/store/apps/details?id=com.alhassanmu.arena99';
-var store=android?play:'https://apps.apple.com/sa/app/id6809119944';
-document.getElementById('store').href=store;
-// Android: intent:// opens the app if installed, otherwise Chrome follows the fallback to Google Play
-if(android){deep='intent://duel?'+(s?'s='+encodeURIComponent(s)+'&':'')+(c?'c='+encodeURIComponent(c):'')+'#Intent;scheme=arena99;package=com.alhassanmu.arena99;S.browser_fallback_url='+encodeURIComponent(play)+';end';}
-function go(){var t=Date.now();location.href=deep;if(android)return;setTimeout(function(){if(Date.now()-t<2000&&!document.hidden)location.href=store;},1400);}
-document.getElementById('open').addEventListener('click',function(e){e.preventDefault();go();});
-if(/iPhone|iPad/.test(navigator.userAgent))setTimeout(go,400);
+var appStore='https://apps.apple.com/sa/app/id6809119944';
+var web=location.href.replace(/play\.html.*$/,'')+'app/';
+
+if(r){
+  // v2 «60 ثانية» challenge: the friend plays the SAME 5 questions in the browser, no install.
+  var webPlay=web+'?go=round&r='+encodeURIComponent(r);
+  try{
+    var raw=decodeURIComponent(escape(atob(r.replace(/-/g,'+').replace(/_/g,'/'))));
+    var parts=raw.split('~'),name=parts[1]||'صديقك',pts=[100,70,40,20],score=0,cells='';
+    (parts[3]||'').split(',').forEach(function(m){var x=m.split(':'),cl=+x[1]||0,ok=x[2]==='1';if(ok)score+=pts[Math.min(3,cl)];cells+=ok?['🟩','🟨','🟧','🟥'][Math.min(3,cl)]:'⬛';});
+    document.getElementById('h').textContent=name+' يتحداك ⚡ '+score;
+    var g=document.getElementById('grid');g.textContent=cells;g.hidden=false;
+  }catch(e){document.getElementById('h').textContent='تحدي 60 ثانية ⚡';}
+  document.getElementById('p').innerHTML='نفس الأسئلة الخمسة · رياضيات تحصيلي<br>تلعبها من المتصفح مباشرة — بدون تحميل ولا تسجيل';
+  var o=document.getElementById('open');o.textContent='⚡ العب التحدي الآن';o.href=webPlay;
+  var st=document.getElementById('store');
+  if(ios){st.textContent='عندي التطبيق — افتحه فيه';st.href='arena99://round?r='+encodeURIComponent(r);}
+  else if(android){st.textContent='عندي التطبيق — افتحه فيه';st.href='intent://round?r='+encodeURIComponent(r)+'#Intent;scheme=arena99;package=com.alhassanmu.arena99;S.browser_fallback_url='+encodeURIComponent(webPlay)+';end';}
+  else st.hidden=true;
+}else{
+  // 1.5 duel links: try the app first; if it isn't installed the store opens after a moment.
+  if(c){document.getElementById('h').textContent=c+' يتحداك 🥊';}
+  var deep='arena99://duel?'+(s?'s='+encodeURIComponent(s)+'&':'')+(c?'c='+encodeURIComponent(c):'');
+  var store=android?play:appStore;
+  document.getElementById('store').href=store;
+  // Android: intent:// opens the app if installed, otherwise Chrome follows the fallback to Google Play
+  if(android){deep='intent://duel?'+(s?'s='+encodeURIComponent(s)+'&':'')+(c?'c='+encodeURIComponent(c):'')+'#Intent;scheme=arena99;package=com.alhassanmu.arena99;S.browser_fallback_url='+encodeURIComponent(play)+';end';}
+  var go=function(){var t=Date.now();location.href=deep;if(android)return;setTimeout(function(){if(Date.now()-t<2000&&!document.hidden)location.href=store;},1400);};
+  document.getElementById('open').addEventListener('click',function(e){e.preventDefault();go();});
+  if(ios)setTimeout(go,400);
+}
 </script></body></html>
