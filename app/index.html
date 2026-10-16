@@ -6,7 +6,25 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no"
     />
-    <meta name="theme-color" content="#FAF9F6" />
+    <meta name="theme-color" content="#F5F3EE" />
+    <script>
+      // 2.2 themes: pick the palette BEFORE first paint (mirrors normalizePref/resolveTheme in
+      // src/theme/tokens.ts). Saved choice wins; none / auto → the phone's appearance.
+      (function () {
+        try {
+          var t = (JSON.parse(localStorage.getItem('arena99.settings') || '{}').state || {}).theme;
+          var old = { paper: 'light', pearl: 'light', calm: 'dark', neon: 'dark', graphite: 'dark', desert: 'dark' };
+          t = old[t] || t;
+          if (t !== 'light' && t !== 'dim' && t !== 'dark') {
+            t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+          var bg = { light: '#F5F3EE', dim: '#3B3936', dark: '#151413' }[t];
+          document.documentElement.style.background = bg;
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', bg);
+        } catch (e) {}
+      })();
+    </script>
     <title>ساحة 99</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,13 +32,13 @@
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="./assets/index-CbaHEeb5.js"></script>
+    <script type="module" crossorigin src="./assets/index-veqFtUK3.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-hePW80VL.js">
     <link rel="modulepreload" crossorigin href="./assets/vendor-n64-R-We.js">
     <link rel="modulepreload" crossorigin href="./assets/bank-CRqjCHcm.js">
-    <link rel="stylesheet" crossorigin href="./assets/index-CzyjF6ck.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-BnAliwtd.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
   </body>
 </html>
