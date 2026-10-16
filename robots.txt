@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /arena99-site/confirmed.html
+
+Sitemap: https://hassma0k.github.io/arena99-site/sitemap.xml
