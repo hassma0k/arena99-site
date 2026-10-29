@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#FBF7EF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121413" media="(prefers-color-scheme: dark)">
 <meta name="color-scheme" content="light dark">
-<meta name="apple-itunes-app" content="app-id=6809119944">
+<meta name="apple-itunes-app" content="app-id=6809119944, app-argument=https://hassma0k.github.io/arena99-site/app/?go=round&amp;src=smart_banner">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_SA">
 <meta property="og:site_name" content="ساحة 99">
@@ -17,6 +17,7 @@
 <meta property="og:description" content="تدريب رياضيات التحصيلي والكمي كلعبة سريعة: مجاني بلا حدود، تفهم خطأك، وتتحدّى أصدقاءك برابط واحد.">
 <meta property="og:url" content="https://hassma0k.github.io/arena99-site/">
 <meta property="og:image" content="https://hassma0k.github.io/arena99-site/assets/landing/og-landing-2026-10.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="ساحة 99 — خمس مسائل، 60 ثانية لكل مسألة، وكل خطأ يعلّمك">
@@ -24,6 +25,7 @@
 <meta name="twitter:title" content="ساحة 99 — خمس مسائل، وكل خطأ يعلّمك">
 <meta name="twitter:description" content="تدريب رياضيات التحصيلي والكمي كلعبة سريعة: مجاني بلا حدود، تفهم خطأك، وتتحدّى أصدقاءك برابط واحد.">
 <meta name="twitter:image" content="https://hassma0k.github.io/arena99-site/assets/landing/og-landing-2026-10.jpg">
+<meta name="twitter:image:alt" content="ساحة 99 — خمس مسائل، 60 ثانية لكل مسألة، وكل خطأ يعلّمك">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBF7EF'/%3E%3Cg fill='none' stroke='%230F766E' stroke-width='4.6' stroke-linecap='round'%3E%3Ccircle cx='23' cy='27' r='8'/%3E%3Cpath d='M31 27l-3 18'/%3E%3Ccircle cx='42' cy='27' r='8'/%3E%3Cpath d='M50 27l-3 18'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="assets/landing/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +33,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap">
 <link rel="preload" as="image" href="assets/landing/round.webp" type="image/webp">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"MobileApplication","name":"ساحة 99: تدريب تحصيلي وكمي","operatingSystem":"iOS, Web","applicationCategory":"EducationalApplication","inLanguage":"ar","url":"https://hassma0k.github.io/arena99-site/","installUrl":"https://apps.apple.com/sa/app/id6809119944","offers":{"@type":"Offer","price":"0","priceCurrency":"SAR"}}
+{"@context":"https://schema.org","@type":"MobileApplication","name":"ساحة 99: تدريب تحصيلي وكمي","alternateName":"Arena 99","description":"تدريب رياضيات التحصيلي والكمي في القدرات كلعبة سريعة: خمس مسائل، 60 ثانية لكل مسألة، الإجابة الصحيحة وسببها بعد كل خطأ، وتحدي الأصدقاء برابط واحد. اللعب مجاني بلا حدود وبلا إعلانات.","operatingSystem":"iOS, iPadOS, Web","applicationCategory":"EducationalApplication","inLanguage":["ar","en"],"url":"https://hassma0k.github.io/arena99-site/","installUrl":"https://apps.apple.com/sa/app/id6809119944","downloadUrl":"https://apps.apple.com/sa/app/id6809119944","image":"https://hassma0k.github.io/arena99-site/assets/landing/og-landing-2026-10.jpg","screenshot":["https://hassma0k.github.io/arena99-site/assets/landing/round.webp","https://hassma0k.github.io/arena99-site/assets/landing/wrong.webp","https://hassma0k.github.io/arena99-site/assets/landing/result.webp"],"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"SAR"}}
 </script>
 <style>
 :root{
@@ -75,6 +77,8 @@ a{color:inherit}
 .nav a:hover{background:var(--surface2)}
 .nav .hide-sm{display:none}
 .nav .pill{border:1.5px solid var(--line);color:var(--ink)}
+.brand,.nav a{white-space:nowrap}
+@media (max-width:359px){.nav .xs-hide{display:none}}
 
 /* buttons */
 .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
@@ -86,6 +90,9 @@ a{color:inherit}
 @media (max-width:400px){.hero .btn svg{display:none}.hero .btn{padding:0 18px}}
 .btn.solid{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .btn.solid:hover{filter:brightness(1.06)}
+/* Android (not on Google Play yet): the browser game is the real primary action */
+.is-android .btn.play{background:var(--accent);border-color:var(--accent);color:var(--on-accent);order:-1}
+.is-android .btn.play:hover{filter:brightness(1.06)}
 
 /* hero */
 .hero{padding:28px 0 8px}
@@ -257,8 +264,8 @@ footer .brand svg{width:28px;height:28px}
     <nav class="nav" aria-label="روابط الصفحة">
       <a class="hide-sm" href="#how">كيف تلعب</a>
       <a class="hide-sm" href="#board">لوحة التحدي</a>
-      <a href="#plans">الخطط</a>
-      <a class="pill hide-sm" href="https://hassma0k.github.io/arena99-site/app/">العب الآن</a>
+      <a class="xs-hide" href="#plans">الخطط</a>
+      <a class="pill" href="https://hassma0k.github.io/arena99-site/app/" data-cta="nav-play">العب الآن</a>
     </nav>
   </div>
 </header>
@@ -273,18 +280,18 @@ footer .brand svg{width:28px;height:28px}
       <h1 id="h1">خمس مسائل، <span class="nw"><span class="num">60</span> ثانية</span> لكل مسألة.<br><span class="soft">وكل خطأ يعلّمك.</span></h1>
       <p class="lead">تدريب رياضيات التحصيلي والكمي كلعبة سريعة: تلعب مجانًا، تفهم خطأك، وتتحدّى أصدقاءك برابط واحد.</p>
       <div class="ctas">
-        <a class="badge" href="https://apps.apple.com/sa/app/id6809119944" aria-label="حمّل ساحة 99 من App Store">
+        <a class="badge" href="https://apps.apple.com/sa/app/id6809119944" aria-label="حمّل ساحة 99 من App Store" data-cta="hero-appstore">
           <picture>
             <source media="(prefers-color-scheme: dark)" srcset="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/white/ar-ar?size=250x83">
             <img src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/black/ar-ar?size=250x83" alt="Download on the App Store — حمّل من App Store" width="156" height="52">
           </picture>
         </a>
-        <a class="btn" href="https://hassma0k.github.io/arena99-site/app/">
+        <a class="btn play" href="https://hassma0k.github.io/arena99-site/app/" data-cta="hero-play">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
           العب من المتصفح
         </a>
       </div>
-      <p class="fine">يعمل على آيفون وآيباد والمتصفح · أندرويد قريبًا</p>
+      <p class="fine" id="fine">يعمل على آيفون وآيباد والمتصفح · أندرويد قريبًا</p>
       <ul class="trust" aria-label="باختصار">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>مجاني بلا حدود</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>بلا إعلانات</span></li>
@@ -427,7 +434,7 @@ footer .brand svg{width:28px;height:28px}
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>تحدّي الأصدقاء ولوحة التحدي</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>تقرير الجولة PDF</span></li>
         </ul>
-        <a class="btn" href="https://hassma0k.github.io/arena99-site/app/">العب من المتصفح</a>
+        <a class="btn" href="https://hassma0k.github.io/arena99-site/app/" data-cta="plan-free-play">العب من المتصفح</a>
       </article>
       <article class="plan elite">
         <h3>النخبة</h3>
@@ -444,7 +451,7 @@ footer .brand svg{width:28px;height:28px}
           <div class="tier"><span class="tn">شهري<small>تجدّد كل شهر</small></span><span class="tp"><span class="num">9.99</span><small>ر.س</small></span></div>
         </div>
         <p class="note"><span class="num">7</span> أيام مجانًا عند أول اشتراك، على أي خطة. الاشتراك من داخل التطبيق عبر App Store، ويُلغى من إعدادات جهازك في أي وقت.</p>
-        <a class="btn solid" href="https://apps.apple.com/sa/app/id6809119944">ابدأ مجانًا من App Store</a>
+        <a class="btn solid" href="https://apps.apple.com/sa/app/id6809119944" data-cta="plan-elite-appstore">ابدأ مجانًا من App Store</a>
       </article>
     </div>
   </div>
@@ -481,6 +488,8 @@ footer .brand svg{width:28px;height:28px}
       <details><summary>ما الفرق في النخبة؟</summary><p>الحل الكامل خطوة بخطوة لكل مسألة (المجاني فيه <span class="num">3</span> حلول)، و«راجع أخطاءك» بلا حدود بعد يوم و<span class="num">3</span> أيام (المجاني مرة في اليوم)، وشجرة الثغرات وخريطة الإتقان. اللعب والإجابة الصحيحة وسببها مجانية للجميع.</p></details>
       <details><summary>هل أحتاج حسابًا؟</summary><p>لا. تلعب كضيف، وتسجّل لاحقًا إن أردت حفظ تقدّمك على جهاز آخر.</p></details>
       <details><summary>هل يغطي الكمي والتحصيلي؟</summary><p>رياضيات التحصيلي بالكامل، والكمي في القدرات. المواد الأخرى غير مشمولة.</p></details>
+      <details><summary>هل يعمل على أندرويد؟</summary><p>ليس على Google Play بعد. على أندرويد أو الكمبيوتر العب من المتصفح مباشرة، مجانًا وبدون تحميل.</p></details>
+      <details><summary>هل أحتاج إنترنت؟</summary><p>الجولات تعمل في تطبيق الآيفون بدون إنترنت. تحدّي الأصدقاء ولوحة التحدي يحتاجان اتصالًا.</p></details>
       <details><summary>كيف ألغي الاشتراك؟</summary><p>من إعدادات جهازك ← اسمك (Apple ID) ← الاشتراكات. إذا ألغيت قبل نهاية أيام التجربة بـ<span class="num">24</span> ساعة على الأقل، لا يُخصم منك شيء.</p></details>
       <details><summary>من يقف خلف التطبيق؟</summary><p>فريق سعودي مستقل. التطبيق غير تابع للمركز الوطني للقياس.</p></details>
     </div>
@@ -493,13 +502,13 @@ footer .brand svg{width:28px;height:28px}
     <h2 id="final-h">جولتك الأولى الآن.</h2>
     <p class="sub">خمس مسائل، وكل خطأ يعلّمك. مجانًا.</p>
     <div class="ctas">
-      <a class="badge" href="https://apps.apple.com/sa/app/id6809119944" aria-label="حمّل ساحة 99 من App Store">
+      <a class="badge" href="https://apps.apple.com/sa/app/id6809119944" aria-label="حمّل ساحة 99 من App Store" data-cta="final-appstore">
         <picture>
           <source media="(prefers-color-scheme: dark)" srcset="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/white/ar-ar?size=250x83">
           <img src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/black/ar-ar?size=250x83" alt="Download on the App Store — حمّل من App Store" width="156" height="52" loading="lazy">
         </picture>
       </a>
-      <a class="btn" href="https://hassma0k.github.io/arena99-site/app/">العب من المتصفح</a>
+      <a class="btn play" href="https://hassma0k.github.io/arena99-site/app/" data-cta="final-play">العب من المتصفح</a>
     </div>
   </div>
 </section>
@@ -521,5 +530,28 @@ footer .brand svg{width:28px;height:28px}
     <p style="margin:0">تطبيق مستقل غير تابع لقياس · © <span class="num">2026</span></p>
   </div>
 </footer>
+<script>
+/* Campaign passthrough (no cookies, no storage, nothing sent anywhere).
+   Landing URL ?ct=… / ?utm_campaign=… / ?utm_source=… / ?src=… is copied onto:
+   - App Store links as an App Store Connect campaign link (?pt=PROVIDER_TOKEN&ct=…&mt=8)
+   - browser-game links as ?src=… (the app's captureSource() reads it on first launch)
+   PT: App Store Connect → Apps → ساحة 99 → Analytics → Acquisition → Campaigns →
+   "Generate a Campaign Link" — the number after pt= in the generated link. Empty = App Store
+   links stay untouched (a ct without pt is not attributed by Apple). */
+(function(){
+  var PT=''; // TODO(owner): paste the provider token, e.g. '123456789'
+  var q=new URLSearchParams(location.search), re=/^[A-Za-z0-9_.:-]{1,40}$/;
+  var c=q.get('ct')||q.get('utm_campaign')||q.get('utm_source')||q.get('src')||'';
+  if(!re.test(c))c='';
+  var ct=c||'landing';
+  if(/Android/i.test(navigator.userAgent)){document.documentElement.classList.add('is-android');var f=document.getElementById('fine');if(f)f.textContent='على أندرويد: العب من المتصفح الآن، مجانًا وبدون تحميل';}
+  document.querySelectorAll('a[href^="https://apps.apple.com/"]').forEach(function(a){
+    if(!PT)return;var u=new URL(a.href);u.searchParams.set('pt',PT);u.searchParams.set('ct',ct);u.searchParams.set('mt','8');a.href=u.toString();
+  });
+  document.querySelectorAll('a[href^="https://hassma0k.github.io/arena99-site/app/"]').forEach(function(a){
+    var u=new URL(a.href);u.searchParams.set('src',c||'landing');a.href=u.toString();
+  });
+})();
+</script>
 </body>
 </html>
