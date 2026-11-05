@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ساحة 99 — تقدر تتفوّق علي؟</title>
+<meta name="description" content="صديقك يتحداك في 5 أسئلة تحصيلي علمي: فيزياء، كيمياء، أحياء، رياضيات. نفس الأسئلة، ولكل سؤال شرح. مجاني.">
+<meta name="theme-color" content="#F5F3EE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ساحة 99">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:title" content="تقدر تتفوّق علي؟ 5 أسئلة تحصيلي علمي — ساحة 99">
+<meta property="og:description" content="نفس الأسئلة الخمسة، بدون مؤقّت، ولكل سؤال شرح. فيزياء · كيمياء · أحياء · رياضيات.">
+<meta property="og:image" content="https://hassma0k.github.io/arena99-site/og-tahsili-2026-11.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hassma0k.github.io/arena99-site/og-tahsili-2026-11.jpg">
+<style>
+:root{--bg:#F5F3EE;--panel:#FBFAF7;--line:#DDD8CE;--ink:#1C1917;--muted:#57534E;--teal:#0F766E;--on:#FFFFFF}
+@media (prefers-color-scheme:dark){:root{--bg:#151413;--panel:#1E1C1A;--line:#363330;--ink:#EAE6DF;--muted:#C9C3B9;--teal:#5BBDAD;--on:#151413}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:Cairo,'Geeza Pro',Tahoma,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 16px}
+main{width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:20px}
+.logo b{font:800 26px ui-monospace,Menlo,monospace;color:#fff;background:#0F766E;border-radius:12px;padding:2px 10px}
+h1{font-size:27px;line-height:1.4;margin:4px 0 0}
+p{color:var(--muted);margin:0;line-height:1.8;font-size:15px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chips span{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;font-weight:800;font-size:13px;color:var(--muted)}
+.b{display:block;width:100%;background:var(--teal);color:var(--on);font-weight:900;font-size:18px;text-decoration:none;border:0;border-radius:14px;padding:15px}
+.g{background:transparent;color:var(--teal);border:1px solid var(--line);font-size:15px;padding:12px}
+.s{color:var(--muted);font-size:12px;margin-top:8px;opacity:.8}
+</style></head>
+<body>
+<main>
+<div class="logo"><b>99</b>ساحة 99</div>
+<h1 id="h">تقدر تتفوّق علي؟</h1>
+<p id="p">5 أسئلة تحصيلي علمي، نفس الأسئلة التي حللتها.<br>بدون مؤقّت، ولكل سؤال شرح.</p>
+<div class="chips" id="chips"></div>
+<a class="b" id="open" href="#">عندي التطبيق — افتح التحدي</a>
+<a class="b g" id="store" href="https://apps.apple.com/sa/app/id6809119944">ما عندك التطبيق؟ حمّله مجانًا</a>
+<a class="b g" id="web" href="#">جرّب في المتصفح</a>
+<div class="s">تدريب مستقل غير تابع لأي جهة رسمية · عربي وإنجليزي</div>
+</main>
+<script>
+var q=new URLSearchParams(location.search);
+var ids=(q.get('q')||'').split('.').filter(function(x){return /^(phys|chem|bio|math)-u\d{2}-\d{3}$/.test(x)}).slice(0,5);
+var s=Math.max(0,Math.min(5,parseInt(q.get('s')||'0',10)||0));
+var n=(q.get('n')||'').replace(/[<>&~|]/g,' ').trim().slice(0,20);
+var names={phys:'فيزياء',chem:'كيمياء',bio:'أحياء',math:'رياضيات'};
+if(ids.length>=3){
+  document.getElementById('h').textContent=(n||'صديقك')+' يتحدّاك';
+  document.getElementById('p').innerHTML='نفس الأسئلة الخمسة. أصاب '+s+' من '+ids.length+'.<br>تقدر تتفوّق؟ بدون مؤقّت، ولكل سؤال شرح.';
+  var seen={};ids.forEach(function(id){var k=id.split('-')[0];if(!seen[k]){seen[k]=1;var e=document.createElement('span');e.textContent=names[k];document.getElementById('chips').appendChild(e);}});
+}
+var qs='q='+encodeURIComponent(ids.join('.'))+'&s='+s+(n?'&n='+encodeURIComponent(n):'');
+var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var store='https://apps.apple.com/sa/app/id6809119944';
+var open=document.getElementById('open');open.href='arena99://tc?'+qs;
+if(ios){open.addEventListener('click',function(){var t=Date.now();setTimeout(function(){if(Date.now()-t<2000&&!document.hidden)location.href=store;},1400);});}
+else{open.hidden=true;}
+document.getElementById('web').href=location.href.replace(/t\.html.*$/,'')+'app/?go=tc&'+qs;
+</script>
+</body></html>
