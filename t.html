@@ -43,16 +43,17 @@ p{color:var(--muted);margin:0;line-height:1.8;font-size:15px}
 </main>
 <script>
 var q=new URLSearchParams(location.search);
-var ids=(q.get('q')||'').split('.').filter(function(x){return /^(phys|chem|bio|math)-u\d{2}-\d{3}$/.test(x)}).slice(0,5);
-var s=Math.max(0,Math.min(5,parseInt(q.get('s')||'0',10)||0));
+var ids=(q.get('q')||'').split('.').filter(function(x){return /^(phys|chem|bio|math)-u\d{2}-\d{3}$/.test(x)}).slice(0,12);
+var s=Math.max(0,Math.min(ids.length||5,parseInt(q.get('s')||'0',10)||0));
+var e=Math.max(0,Math.min(100,parseInt(q.get('e')||'0',10)||0));
 var n=(q.get('n')||'').replace(/[<>&~|]/g,' ').trim().slice(0,20);
 var names={phys:'فيزياء',chem:'كيمياء',bio:'أحياء',math:'رياضيات'};
 if(ids.length>=3){
   document.getElementById('h').textContent=(n||'صديقك')+' يتحدّاك';
-  document.getElementById('p').innerHTML='نفس الأسئلة الخمسة. أصاب '+s+' من '+ids.length+'.<br>تقدر تتفوّق؟ بدون مؤقّت، ولكل سؤال شرح.';
+  document.getElementById('p').innerHTML=ids.length>5?('نفس أسئلة اختبار تحديد المستوى ('+ids.length+' سؤالًا). أصاب '+s+' من '+ids.length+(e?' وتقديره '+e:'')+'.<br>اعرف تقديرك أنت في التحصيلي، في 10 دقائق.'):('نفس الأسئلة الخمسة. أصاب '+s+' من '+ids.length+'.<br>تقدر تتفوّق؟ بدون مؤقّت، ولكل سؤال شرح.');
   var seen={};ids.forEach(function(id){var k=id.split('-')[0];if(!seen[k]){seen[k]=1;var e=document.createElement('span');e.textContent=names[k];document.getElementById('chips').appendChild(e);}});
 }
-var qs='q='+encodeURIComponent(ids.join('.'))+'&s='+s+(n?'&n='+encodeURIComponent(n):'');
+var qs='q='+encodeURIComponent(ids.join('.'))+'&s='+s+(e?'&e='+e:'')+(n?'&n='+encodeURIComponent(n):'');
 var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 var store='https://apps.apple.com/sa/app/id6809119944';
 var open=document.getElementById('open');open.href='arena99://tc?'+qs;
