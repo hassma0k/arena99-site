@@ -50,10 +50,13 @@ var n=(q.get('n')||'').replace(/[<>&~|]/g,' ').trim().slice(0,20);
 var names={phys:'فيزياء',chem:'كيمياء',bio:'أحياء',math:'رياضيات'};
 if(ids.length>=3){
   document.getElementById('h').textContent=(n||'صديقك')+' يتحدّاك';
-  document.getElementById('p').innerHTML=ids.length>5?('نفس أسئلة اختبار تحديد المستوى ('+ids.length+' سؤالًا). أصاب '+s+' من '+ids.length+(e?' وتقديره '+e:'')+'.<br>اعرف تقديرك أنت في التحصيلي، في 10 دقائق.'):('نفس الأسئلة الخمسة. أصاب '+s+' من '+ids.length+'.<br>تقدر تتفوّق؟ بدون مؤقّت، ولكل سؤال شرح.');
+  var nq=ids.length<=10?ids.length+' أسئلة':ids.length+' سؤالًا';
+  document.getElementById('p').innerHTML='نفس أسئلته: '+nq+'. أصاب '+s+' من '+ids.length+(e?' وتقديره '+e+' من 100':'')+'.<br>تقدر تتفوّق، وتعرف تقديرك أنت في التحصيلي؟ مع الشرح بعد كل سؤال.';
   var seen={};ids.forEach(function(id){var k=id.split('-')[0];if(!seen[k]){seen[k]=1;var e=document.createElement('span');e.textContent=names[k];document.getElementById('chips').appendChild(e);}});
 }
-var qs='q='+encodeURIComponent(ids.join('.'))+'&s='+s+(e?'&e='+e:'')+(n?'&n='+encodeURIComponent(n):'');
+var self=q.get('k')==='u';
+if(self&&ids.length>=3){document.getElementById('h').textContent='اختبر نفسك في هذه الوحدة';document.getElementById('p').innerHTML=(ids.length<=10?ids.length+' أسئلة':ids.length+' سؤالًا')+' من وحدة واحدة، مع الشرح بعد كل سؤال.<br>بدون تسجيل، ومجانًا.';}
+var qs='q='+encodeURIComponent(ids.join('.'))+'&s='+s+(e?'&e='+e:'')+(self?'&k=u':'')+(n?'&n='+encodeURIComponent(n):'');
 var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 var store='https://apps.apple.com/sa/app/id6809119944';
 var open=document.getElementById('open');open.href='arena99://tc?'+qs;
