@@ -39,6 +39,7 @@ p{color:var(--muted);margin:0;line-height:1.8;font-size:15px}
 <a class="b" id="open" href="#">عندي التطبيق — افتح التحدي</a>
 <a class="b g" id="store" href="https://apps.apple.com/sa/app/id6809119944">ما عندك التطبيق؟ حمّله مجانًا</a>
 <a class="b g" id="web" href="#">جرّب في المتصفح</a>
+<div class="s" id="hint" hidden>ما فتح التطبيق؟ إن لم يكن عندك، حمّله من الزر أعلاه أو جرّب في المتصفح.</div>
 <div class="s">تدريب مستقل غير تابع لأي جهة رسمية · عربي وإنجليزي</div>
 </main>
 <script>
@@ -60,8 +61,25 @@ var qs='q='+encodeURIComponent(ids.join('.'))+'&s='+s+(e?'&e='+e:'')+(self?'&k=u
 var ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 var store='https://apps.apple.com/sa/app/id6809119944';
 var open=document.getElementById('open');open.href='arena99://tc?'+qs;
-if(ios){open.addEventListener('click',function(){var t=Date.now();setTimeout(function(){if(Date.now()-t<2000&&!document.hidden)location.href=store;},1400);});}
+// 2.9.0: no automatic jump to the App Store any more. If the app did not open (the page is still in front
+// after 3 s) we only say so and light up the store button; the visitor decides. Nothing ever navigates by itself.
+function hint(){var h=document.getElementById('hint');if(h)h.hidden=false;var st=document.getElementById('store');st.style.borderColor='var(--teal)';st.style.color='var(--teal)';}
+if(ios){open.addEventListener('click',function(){var t=Date.now();setTimeout(function(){if(Date.now()-t<5000&&!document.hidden&&document.hasFocus())hint();},3000);});}
 else{open.hidden=true;}
 document.getElementById('web').href=location.href.replace(/t\.html.*$/,'')+'app/?go=tc&'+qs;
+
+// 2.9.0: three anonymous events into the same Supabase anon_events table the app uses (public publishable key,
+// insert-only RLS). No name, no e-mail, no IP: a random id made in this browser, the kind of link, the platform.
+var SB='https://amhperczhefponbuspyi.supabase.co',SBK='sb_publishable_xW4HFA9F9IZvp9H5PJNWOQ_sTjM9uzV';
+function did(){try{var d=localStorage.getItem('a99.web.device');if(!d){d='w_'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem('a99.web.device',d);}return d;}catch(x){return 'w_unknown';}}
+function ev(name){
+  try{
+    fetch(SB+'/rest/v1/anon_events',{method:'POST',keepalive:true,headers:{apikey:SBK,Authorization:'Bearer '+SBK,'Content-Type':'application/json',Prefer:'return=minimal'},
+      body:JSON.stringify({device:did(),kind:'ev',authed:false,platform:'web',ev:name,src:self?'selftest':(ids.length>=3?'dare':'direct'),props:{page:'t',ios:ios,n:ids.length}})}).catch(function(){});
+  }catch(x){}
+}
+ev('t_dare_web_view');
+document.getElementById('web').addEventListener('click',function(){ev('t_dare_web_play');});
+document.getElementById('store').addEventListener('click',function(){ev('t_dare_web_store');});
 </script>
 </body></html>
